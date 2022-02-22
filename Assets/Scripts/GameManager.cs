@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        LoadLevel(1);
     }
 
     private void Update()
@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     void LoadLevel(int lvindex) 
     {
         level = Resources.Load<Level>("Levels/" + lvindex);
+        print(level.coins[0].coinName);
     }
 
     bool ChangeBalance(float amount)
