@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2fccc6ff9999a4aab19c49563912ee, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  coins: []
-  notifs: []
+  coins:
+  - {fileID: 11400000, guid: 453cde50fd67b3c42a00b817fe219340, type: 2}
+  notifs:
+  - {fileID: 11400000, guid: 95f2be90ea07c3a4e8e262ac84f74160, type: 2}
   targetBalance: 0

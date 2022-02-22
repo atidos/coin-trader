@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 071252efe247bb744802d8cf1feaf015, type: 3}
   m_Name: Rezillik
   m_EditorClassIdentifier: 
+  header: 'From Mom:'
+  body: "Olum bu odan\u0131n hali ne"
+  icon: {fileID: 21300000, guid: cd36014a03a018844af05a26875ac9ce, type: 3}
