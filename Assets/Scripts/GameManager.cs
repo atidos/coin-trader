@@ -5,20 +5,39 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     Level level;
-    void LoadLevel(int lvindex) {
-    
+
+    float timeToNextCoin;
+
+    private void Start()
+    {
+        
     }
+
+    private void Update()
+    {
+
+    }
+
+    void LoadLevel(int lvindex) 
+    {
+        level = Resources.Load<Level>("Levels/" + lvindex);
+    }
+
     bool ChangeBalance(float amount)
     {
         level.targetBalance += amount;
         return true;
     }
-    void CreateCoinPanel(Coin coins[])
+
+    void CreateCoinPanel(Coin coin)
     {
 
     }
-    void GenerateNotifications(Notification notifs[])
-    {
 
+    void GenerateNotification(Notification notifs)
+    {
+        
     }
+
+    
 }
