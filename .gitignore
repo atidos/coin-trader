@@ -3,6 +3,7 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 /[Ll]ibrary/
+/[Ll]ogs/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
@@ -51,6 +52,7 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+*.log
 
 # Unity3D generated file on crash reports
 sysinfo.txt
