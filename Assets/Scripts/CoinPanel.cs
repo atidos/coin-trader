@@ -28,13 +28,14 @@ public class CoinPanel : MonoBehaviour
         initTime = Time.time;
     }
     
-    public void Init( string cText , Sprite cSprite, int pCons, int tCons)
+    public void Init(Coin coin, int pCons, int tCons)
     {
-        coinText.text = cText;
-        coinIcon.sprite = cSprite;
+        coinText.text = coin.coinName;
+        coinIcon.sprite = coin.icon;
         priceConstant = pCons;
         timeConstant = tCons;
     }
+
     void Update()
     {
         current = curve.Evaluate((Time.time-initTime)/timeConstant); //calculates the current price using the curve and timeConstant
