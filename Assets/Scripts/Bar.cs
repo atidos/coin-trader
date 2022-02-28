@@ -5,21 +5,33 @@ using UnityEngine.UI;
 
 public class Bar : MonoBehaviour
 {
-    RectTransform rt;
+    RectTransform rtBar;
+    public RectTransform rtFill;
     public float objective;
     public float money;
 
+    float targetValue=0;
+    float currentValue;
+    float vel;
+    public float smoothTime = 0.2f;
 
     private void Start()
     {
-        rt = GetComponent<RectTransform>();
+        rtBar = GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        float ratio = objective / money;
+        float ratio = money / objective;
 
-        //rt.right = Mathf.Lerp(rt.rect.width, 0, ratio);
+
+        targetValue = -Mathf.Lerp(rtBar.rect.width, 0, ratio);
+        currentValue = Mathf.SmoothDamp(rtFill.offsetMax.x, targetValue, ref vel, smoothTime);
+
+        rtFill.offsetMax = new Vector2(currentValue, rtFill.offsetMax.y);
+
+
+            
     }
 }
