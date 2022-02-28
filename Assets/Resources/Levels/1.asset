@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coins:
   - {fileID: 11400000, guid: 453cde50fd67b3c42a00b817fe219340, type: 2}
+  - {fileID: 11400000, guid: 594f6c27873b5274b9d52282af332d81, type: 2}
+  - {fileID: 11400000, guid: 68a066347c365ce45bd8c005705675bb, type: 2}
+  - {fileID: 11400000, guid: 4f7a4c8a47de9404987ef2c28a354a7b, type: 2}
+  - {fileID: 11400000, guid: dc3ae7fc27523094f9590eb7ab6af459, type: 2}
   notifs:
   - {fileID: 11400000, guid: 95f2be90ea07c3a4e8e262ac84f74160, type: 2}
   targetBalance: 0
