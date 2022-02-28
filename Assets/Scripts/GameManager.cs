@@ -1,7 +1,17 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+/*
+    todo:
+    -CoinLoop and Notification loop
+    -dynamic coinSpace adjustment
+    -bi coin çıkarınca sonrakilerin yukarı gelmesi
+    -buy/sell mekaniği (coinpanel ile beraber)
+    -objective bar kontrolü
+    -oyun kazanma
+*/
 
 public class GameManager : MonoBehaviour
 {
