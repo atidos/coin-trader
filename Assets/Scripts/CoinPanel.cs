@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+//TODO: add button fnc & curve manuplation parameters
 public class CoinPanel : MonoBehaviour
 {
     public Button button;
@@ -24,23 +24,20 @@ public class CoinPanel : MonoBehaviour
         initTime = Time.time;
     }
     
-    public void Init( string cText , Sprite cSprite, AnimationCurve aCurve,int pCons, int tCons)
+    public void Init( string cText , Sprite cSprite, int pCons, int tCons)
     {
-        //TODO: find a way to get partial inputs in Init function and take ungiven values as defaults above.
         coinText.text = cText;
         coinIcon.sprite = cSprite;
-        curve = aCurve;
         priceConstant = pCons;
         timeConstant = tCons;
     }
-    
     void Update()
     {
         current = curve.Evaluate((Time.time-initTime)/timeConstant); //calculates the current price using the curve and timeConstant
         price = current * priceConstant; 
         priceText.text = Mathf.Floor(price).ToString(); //this and the above line shape the price tag
 
-        if (current<previous) //checks if the price started dropping or not
+        if (current<previous && indicatorImage.color != Color.red) //checks if the price started dropping or not
         {
             indicatorImage.color = Color.red; //if price is dropping change the color to red
         }

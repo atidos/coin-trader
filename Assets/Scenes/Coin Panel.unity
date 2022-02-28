@@ -472,5 +472,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 5639907261438127512, guid: d0a638ed4cff3f94ca32b436986a5961, type: 3}
+      propertyPath: curve.m_Curve.Array.data[0].time
+      value: -0.000040159008
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639907261438127512, guid: d0a638ed4cff3f94ca32b436986a5961, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].time
+      value: 0.5001003
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639907261438127512, guid: d0a638ed4cff3f94ca32b436986a5961, type: 3}
+      propertyPath: curve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639907261438127512, guid: d0a638ed4cff3f94ca32b436986a5961, type: 3}
+      propertyPath: curve.m_Curve.Array.data[0].value
+      value: 0.12957764
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639907261438127512, guid: d0a638ed4cff3f94ca32b436986a5961, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].value
+      value: 1.4999757
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639907261438127512, guid: d0a638ed4cff3f94ca32b436986a5961, type: 3}
+      propertyPath: curve.m_Curve.Array.data[2].value
+      value: 0.000049352646
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639907261438127512, guid: d0a638ed4cff3f94ca32b436986a5961, type: 3}
+      propertyPath: curve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639907261438127512, guid: d0a638ed4cff3f94ca32b436986a5961, type: 3}
+      propertyPath: curve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639907261438127512, guid: d0a638ed4cff3f94ca32b436986a5961, type: 3}
+      propertyPath: curve.m_Curve.Array.data[0].outWeight
+      value: 0.022805834
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0a638ed4cff3f94ca32b436986a5961, type: 3}
