@@ -34,11 +34,7 @@ public class GameManager : MonoBehaviour
     {
         LoadLevel(1);
         readyCoins = new List<Coin>(level.coins);
-        CreateCoinPanel(readyCoins[0]);
-        CreateCoinPanel(readyCoins[1]);
-        CreateCoinPanel(readyCoins[2]);
-        CreateCoinPanel(readyCoins[3]);
-        CreateCoinPanel(readyCoins[4]);
+        CreateCoinPanel(readyCoins[0], 1000, 30);
     }
 
     private void Update()
@@ -72,14 +68,14 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    void CreateCoinPanel(Coin coin)
+    void CreateCoinPanel(Coin coin, int peakPrice, int curveTime)
     {
         GameObject newCoinPanelObj = Instantiate(coinPanelPrefab, coinSpace.transform);
 
         newCoinPanelObj.GetComponent<RectTransform>().localPosition += new Vector3(0, topOffset + coinPanels.Count * offset); //localposition is the position relative to
 
         CoinPanel newCoinPanel = newCoinPanelObj.GetComponent<CoinPanel>();
-        newCoinPanel.Init(coin, 1000, 10);
+        newCoinPanel.Init(coin, peakPrice, curveTime);
         coinPanels.Add(newCoinPanel);
     }
 
