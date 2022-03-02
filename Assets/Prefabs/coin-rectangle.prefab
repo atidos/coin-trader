@@ -348,7 +348,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7660898965997953678}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7660898967129210781}
+        m_TargetAssemblyTypeName: CoinPanel, Assembly-CSharp
+        m_MethodName: Buy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7660898966849872204
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,3 +575,4 @@ MonoBehaviour:
   indicatorDown: {fileID: 21300000, guid: 39b6ec1fc5fa55a4ca580127c3df5f1f, type: 3}
   upColor: {r: 0.41960785, g: 0.9372549, b: 0.7176471, a: 1}
   downColor: {r: 0.9411765, g: 0.54509807, b: 0.5176471, a: 1}
+  gameManager: {fileID: 0}

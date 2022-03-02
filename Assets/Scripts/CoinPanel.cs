@@ -19,16 +19,19 @@ public class CoinPanel : MonoBehaviour
     float current = 0; //price in current frame
     float price = 0; //price after calculating with priceConstant
     int priceConstant = 1000; // value to multiply with current price
-    int timeConstant = 50; // value to divide current position on curve, helps determining the lifetime of the coin/curve
+    float timeConstant = 50; // value to divide current position on curve, helps determining the lifetime of the coin/curve
 
     float initTime;
+
+    public GameManager gameManager;
 
     void Start()
     {
         initTime = Time.time;
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
     
-    public void Init(Coin coin, int pCons, int tCons)
+    public void Init(Coin coin, int pCons, float tCons)
     {
         coinText.text = coin.coinName;
         coinIcon.sprite = coin.icon;
@@ -54,5 +57,10 @@ public class CoinPanel : MonoBehaviour
         }
 
         previous = current;
+    }
+
+    public void Buy()
+    {
+        gameManager.RemoveCoinPanel(this);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 /*
     todo:
@@ -30,11 +31,16 @@ public class GameManager : MonoBehaviour
 
     public List<CoinPanel> coinPanels = new List<CoinPanel>();
 
+    public Vector2 timeRange;
+    public Vector2Int priceRange;
+    public Vector2 curveTimeLenght;
+
     private void Start()
     {
         LoadLevel(1);
         readyCoins = new List<Coin>(level.coins);
-        CreateCoinPanel(readyCoins[0], 1000, 30);
+
+        StartCoroutine(CoinLoop(0));
     }
 
     private void Update()
@@ -46,14 +52,21 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
         //create coinpanel
-        StartCoroutine(CoinLoop(0));
+
+        float nextTime = Random.Range(timeRange.x, (float)timeRange.y);
+        int peakPrice = Random.Range(priceRange.x, priceRange.y);
+        float peakTime = Random.Range(curveTimeLenght.x, (float)curveTimeLenght.y);
+
+        CreateCoinPanel(readyCoins[Random.Range(0, readyCoins.Count)], peakPrice, peakTime);
+
+        StartCoroutine(CoinLoop(nextTime));
     }
 
     IEnumerator NotificationLoop(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
         //create coinpanel
-        StartCoroutine(CoinLoop(0));
+        StartCoroutine(NotificationLoop(0));
     }
 
     void LoadLevel(int lvindex) 
@@ -68,15 +81,20 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    void CreateCoinPanel(Coin coin, int peakPrice, int curveTime)
+    void CreateCoinPanel(Coin coin, int peakPrice, float curveTime)
     {
         GameObject newCoinPanelObj = Instantiate(coinPanelPrefab, coinSpace.transform);
 
-        newCoinPanelObj.GetComponent<RectTransform>().localPosition += new Vector3(0, topOffset + coinPanels.Count * offset); //localposition is the position relative to
+        newCoinPanelObj.GetComponent<RectTransform>().localPosition += new Vector3(0, topOffset + coinPanels.Count * offset); //localposition is the position relative to parent
+
+        newCoinPanelObj.transform.localScale = Vector3.zero;
+        newCoinPanelObj.transform.DOScale(Vector3.one, 0.8f).SetEase(Ease.OutElastic, 0.1f, 0.5f);
 
         CoinPanel newCoinPanel = newCoinPanelObj.GetComponent<CoinPanel>();
         newCoinPanel.Init(coin, peakPrice, curveTime);
         coinPanels.Add(newCoinPanel);
+
+        coinSpace.sizeDelta = new Vector3(coinSpace.sizeDelta.x, -(coinPanels.Count-1) * offset - bottomOffset - topOffset);
     }
 
     void GenerateNotification(Notification notifs)
@@ -84,5 +102,15 @@ public class GameManager : MonoBehaviour
         
     }
 
-    
+    public void RemoveCoinPanel(CoinPanel coinPanel)
+    {
+        int index = coinPanels.IndexOf(coinPanel);
+        coinPanels.Remove(coinPanel);
+        Destroy(coinPanel.gameObject);
+
+        for(int i = index; i < coinPanels.Count; i++)
+        {
+            coinPanels[i].GetComponent<RectTransform>().DOLocalMoveY(coinPanels[i].GetComponent<RectTransform>().localPosition.y - offset, 0.3f).SetEase(Ease.InOutQuad);
+        }
+    }
 }
