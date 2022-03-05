@@ -93,10 +93,6 @@ public class CoinPanel : MonoBehaviour
                 purchased = true;
                 button.image.sprite = sellButtonImage;
             }
-            else
-            {
-                button.GetComponent<RectTransform>().DOShakePosition(0.5f, 25f);
-            }
         }
         else
         {
