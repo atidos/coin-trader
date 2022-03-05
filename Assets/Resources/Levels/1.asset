@@ -20,4 +20,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dc3ae7fc27523094f9590eb7ab6af459, type: 2}
   notifs:
   - {fileID: 11400000, guid: 95f2be90ea07c3a4e8e262ac84f74160, type: 2}
-  targetBalance: 0
+  targetBalance: 10000

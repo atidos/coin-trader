@@ -351,7 +351,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7660898967129210781}
         m_TargetAssemblyTypeName: CoinPanel, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: BuySell
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -573,6 +573,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   indicatorUp: {fileID: 21300000, guid: f386504c2a0a3fa4f9af6d6f67360362, type: 3}
   indicatorDown: {fileID: 21300000, guid: 39b6ec1fc5fa55a4ca580127c3df5f1f, type: 3}
+  buyButtonImage: {fileID: 21300000, guid: 04f42e111b53c5b46bbe94c943b3846f, type: 3}
+  buyButtonDisabledImage: {fileID: 21300000, guid: 217a6e1ce4695df478e8d786fcec5d3a, type: 3}
+  sellButtonImage: {fileID: 21300000, guid: a6925e2265bc5f14b97e5fad13192a11, type: 3}
   upColor: {r: 0.41960785, g: 0.9372549, b: 0.7176471, a: 1}
   downColor: {r: 0.9411765, g: 0.54509807, b: 0.5176471, a: 1}
-  gameManager: {fileID: 0}

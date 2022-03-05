@@ -6,17 +6,14 @@ using DG.Tweening;
 
 /*
     todo:
-    -CoinLoop and Notification loop
-    -dynamic coinSpace adjustment
-    -bi coin çıkarınca sonrakilerin yukarı gelmesi
-    -buy/sell mekaniği (coinpanel ile beraber)
-    -objective bar kontrolü
+    -Notification loop
     -oyun kazanma
+    -BAZAN, offsetler karışıyor çok kötü ooluyor. DOTween dolayısıyla...
 */
 
 public class GameManager : MonoBehaviour
 {
-    Level level;
+    public Level level;
 
     float timeToNextCoin;
 
@@ -34,6 +31,44 @@ public class GameManager : MonoBehaviour
     public Vector2 timeRange;
     public Vector2Int priceRange;
     public Vector2 curveTimeLenght;
+
+    private int money = 1000;
+
+    public int Money
+    {
+        get 
+        {
+            return money;
+        }
+        set
+        {
+            money = value;
+            if (money >= level.targetBalance)
+            {
+                //wingame
+            }
+        }
+    }
+
+    private static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject go = new GameObject("GameManager");
+                go.AddComponent<GameManager>();
+            }
+            return _instance;
+        }
+    }
+
+    void Awake()
+    {
+        _instance = this;
+    }
+
 
     private void Start()
     {
@@ -110,7 +145,10 @@ public class GameManager : MonoBehaviour
 
         for(int i = index; i < coinPanels.Count; i++)
         {
-            coinPanels[i].GetComponent<RectTransform>().DOLocalMoveY(coinPanels[i].GetComponent<RectTransform>().localPosition.y - offset, 0.3f).SetEase(Ease.InOutQuad);
+            if(coinPanels[i])
+            {
+                coinPanels[i].GetComponent<RectTransform>().DOLocalMoveY(coinPanels[i].GetComponent<RectTransform>().localPosition.y - offset, 0.3f).SetEase(Ease.InOutQuad);
+            }
         }
     }
 }

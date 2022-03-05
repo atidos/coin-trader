@@ -7,8 +7,7 @@ public class Bar : MonoBehaviour
 {
     RectTransform rtBar;
     public RectTransform rtFill;
-    public float objective;
-    public float money;
+    public Text objectiveText;
 
     float targetValue=0;
     float currentValue;
@@ -18,20 +17,16 @@ public class Bar : MonoBehaviour
     private void Start()
     {
         rtBar = GetComponent<RectTransform>();
+        objectiveText.text = GameManager.Instance.level.targetBalance.ToString() + "$";
     }
-
 
     void Update()
     {
-        float ratio = money / objective;
-
+        float ratio = GameManager.Instance.Money / GameManager.Instance.level.targetBalance;
 
         targetValue = -Mathf.Lerp(rtBar.rect.width, 0, ratio);
         currentValue = Mathf.SmoothDamp(rtFill.offsetMax.x, targetValue, ref vel, smoothTime);
 
         rtFill.offsetMax = new Vector2(currentValue, rtFill.offsetMax.y);
-
-
-            
     }
 }

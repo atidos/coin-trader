@@ -613,6 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa0c04901e4ae14f98a28a581f44467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: {fileID: 0}
   coinPanelPrefab: {fileID: 7660898967129210777, guid: 2c1e8742b5c75de418ef0e49207b19d6, type: 3}
   coinSpace: {fileID: 2024144251}
   topOffset: -275
@@ -722,6 +723,7 @@ GameObject:
   - component: {fileID: 708543830}
   - component: {fileID: 708543832}
   - component: {fileID: 708543831}
+  - component: {fileID: 708543833}
   m_Layer: 5
   m_Name: total-money
   m_TagString: Untagged
@@ -790,6 +792,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708543829}
   m_CullTransparentMesh: 1
+--- !u!114 &708543833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708543829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7968bc67d4f0d2447ba4f3fed8b92555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &718926405
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,8 +1645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rtFill: {fileID: 743299385}
-  objective: 32
-  money: 18.76
+  objectiveText: {fileID: 1721546135}
   smoothTime: 0.2
 --- !u!1 &1876015845
 GameObject:

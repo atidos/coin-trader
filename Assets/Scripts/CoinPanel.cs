@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 //TODO: add button fnc & curve manuplation parameters
 public class CoinPanel : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class CoinPanel : MonoBehaviour
 
     public Sprite indicatorUp;
     public Sprite indicatorDown;
+    public Sprite buyButtonImage;
+    public Sprite buyButtonDisabledImage;
+    public Sprite sellButtonImage;
     public Color upColor;
     public Color downColor;
 
@@ -23,12 +27,12 @@ public class CoinPanel : MonoBehaviour
 
     float initTime;
 
-    public GameManager gameManager;
+    bool purchased = false;
+
 
     void Start()
     {
         initTime = Time.time;
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
     
     public void Init(Coin coin, int pCons, float tCons)
@@ -42,6 +46,12 @@ public class CoinPanel : MonoBehaviour
     void Update()
     {
         current = curve.Evaluate((Time.time-initTime)/timeConstant); //calculates the current price using the curve and timeConstant
+
+        if((Time.time - initTime) / timeConstant > 1)
+        {
+            GameManager.Instance.RemoveCoinPanel(this);
+        }
+
         price = current * priceConstant; 
         priceText.text = Mathf.Floor(price).ToString() + "$"; //this and the above line shape the price tag
 
@@ -56,11 +66,42 @@ public class CoinPanel : MonoBehaviour
             priceText.color = upColor;
         }
 
+        if(!purchased)
+        {
+            if(GameManager.Instance.Money < price)
+            {
+                if(button.image.sprite != buyButtonDisabledImage)
+                    button.image.sprite = buyButtonDisabledImage;
+            }
+            else 
+            {
+                if (button.image.sprite != buyButtonImage)
+                    button.image.sprite = buyButtonImage;
+            }
+        }
+
         previous = current;
     }
 
-    public void Buy()
+    public void BuySell()
     {
-        gameManager.RemoveCoinPanel(this);
+        if(!purchased) //not purchased yet
+        {
+            if(GameManager.Instance.Money >= price)
+            {
+                GameManager.Instance.Money -= (int)price;
+                purchased = true;
+                button.image.sprite = sellButtonImage;
+            }
+            else
+            {
+                button.GetComponent<RectTransform>().DOShakePosition(0.5f, 25f);
+            }
+        }
+        else
+        {
+            GameManager.Instance.Money += (int)price;
+            GameManager.Instance.RemoveCoinPanel(this);
+        }
     }
 }
