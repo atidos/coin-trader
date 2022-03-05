@@ -428,10 +428,10 @@ RectTransform:
   m_Father: {fileID: 95583058}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035, y: -50.0212}
-  m_SizeDelta: {x: 1080, y: 1722.8746}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.000061035156, y: -50.02124}
+  m_SizeDelta: {x: 0, y: -437.12537}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &475736477
 MonoBehaviour:
@@ -619,6 +619,9 @@ MonoBehaviour:
   offset: -195
   bottomOffset: -275
   coinPanels: []
+  timeRange: {x: 2, y: 3}
+  priceRange: {x: 300, y: 3000}
+  curveTimeLenght: {x: 5, y: 60}
 --- !u!4 &643976825
 Transform:
   m_ObjectHideFlags: 0
