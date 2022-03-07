@@ -8,6 +8,7 @@ using DG.Tweening;
     todo:
     -Notification loop
     -oyun kazanma
+    -BAZAN, offsetler karışıyor çok kötü ooluyor. DOTween dolayısıyla...
 */
 
 public class GameManager : MonoBehaviour
