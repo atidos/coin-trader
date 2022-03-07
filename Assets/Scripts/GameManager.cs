@@ -8,7 +8,6 @@ using DG.Tweening;
     todo:
     -Notification loop
     -oyun kazanma
-    -BAZAN, offsetler karışıyor çok kötü ooluyor. DOTween dolayısıyla...
 */
 
 public class GameManager : MonoBehaviour
@@ -147,7 +146,7 @@ public class GameManager : MonoBehaviour
         {
             if(coinPanels[i])
             {
-                coinPanels[i].GetComponent<RectTransform>().DOLocalMoveY(coinPanels[i].GetComponent<RectTransform>().localPosition.y - offset, 0.3f).SetEase(Ease.InOutQuad);
+                coinPanels[i].GetComponent<RectTransform>().DOLocalMoveY(topOffset + i * offset, 0.3f).SetEase(Ease.InOutQuad);
             }
         }
     }
