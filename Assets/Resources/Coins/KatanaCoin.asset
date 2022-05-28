@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a67afe688eed08f419050e913d835310, type: 3}
-  m_Name: CenkCoin
+  m_Name: KatanaCoin
   m_EditorClassIdentifier: 
-  coinName: CenkCoin
-  description: cengor
-  icon: {fileID: 21300000, guid: ce6226e3d9c7e4842be931daa6cc9c1e, type: 3}
+  coinName: KatanaCoin
+  description: 
+  icon: {fileID: 21300000, guid: e66f4f528bacaf24dbbf6fb07a5db368, type: 3}

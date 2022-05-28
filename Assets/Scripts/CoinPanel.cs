@@ -19,6 +19,10 @@ public class CoinPanel : MonoBehaviour
     public Color upColor;
     public Color downColor;
 
+    public AudioClip[] buySounds;
+    public AudioClip[] sellSounds;
+    public AudioClip[] notSounds;
+
     float previous = 0; //price in previous frame
     float current = 0; //price in current frame
     float price = 0; //price after calculating with priceConstant
@@ -92,12 +96,25 @@ public class CoinPanel : MonoBehaviour
                 GameManager.Instance.Money -= (int)price;
                 purchased = true;
                 button.image.sprite = sellButtonImage;
+
+                if(buySounds.Length > 0)
+                    GameManager.Instance.audioSource.PlayOneShot(buySounds[Random.Range(0, buySounds.Length - 1)], 0.2f);
+            }
+            else
+            {
+                transform.DOShakePosition(0.3f, 10);
+
+                if (notSounds.Length > 0)
+                    GameManager.Instance.audioSource.PlayOneShot(notSounds[Random.Range(0, notSounds.Length - 1)], 0.2f);
             }
         }
         else
         {
             GameManager.Instance.Money += (int)price;
             GameManager.Instance.RemoveCoinPanel(this);
+
+            if (sellSounds.Length > 0)
+                GameManager.Instance.audioSource.PlayOneShot(sellSounds[Random.Range(0, sellSounds.Length - 1)], 0.2f);
         }
     }
 }

@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     private int money = 1000;
 
+    public AudioSource audioSource;
+
     public int Money
     {
         get 
@@ -73,9 +75,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         LoadLevel(1);
-        readyCoins = new List<Coin>(level.coins);
-
-        StartCoroutine(CoinLoop(0));
     }
 
     private void Update()
@@ -107,7 +106,13 @@ public class GameManager : MonoBehaviour
     void LoadLevel(int lvindex) 
     {
         level = Resources.Load<Level>("Levels/" + lvindex);
-        print(level.coins[0].coinName);
+
+        readyCoins = new List<Coin>(level.coins);
+        audioSource = GetComponent<AudioSource>();
+
+        StartCoroutine(CoinLoop(0));
+
+        Debug.Log("Level " + lvindex + " loaded.");
     }
 
     bool ChangeBalance(float amount)

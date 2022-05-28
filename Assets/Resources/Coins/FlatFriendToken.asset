@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67afe688eed08f419050e913d835310, type: 3}
+  m_Name: FlatFriendToken
+  m_EditorClassIdentifier: 
+  coinName: FlatFriendToken
+  description: cengor
+  icon: {fileID: 21300000, guid: 9ca01a57b9ce88746a6b5cebcc5dee5b, type: 3}
