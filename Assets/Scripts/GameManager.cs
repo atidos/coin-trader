@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public float offset = -195;
     public float bottomOffset = -275;
 
+
     public List<CoinPanel> coinPanels = new List<CoinPanel>();
 
     public Vector2 timeRange;
@@ -91,6 +92,10 @@ public class GameManager : MonoBehaviour
         int peakPrice = Random.Range(priceRange.x, priceRange.y);
         float peakTime = Random.Range(curveTimeLenght.x, (float)curveTimeLenght.y);
 
+        while(readyCoins.Count == 0)
+        {
+            yield return null;
+        }
         CreateCoinPanel(readyCoins[Random.Range(0, readyCoins.Count)], peakPrice, peakTime);
 
         StartCoroutine(CoinLoop(nextTime));
@@ -135,6 +140,8 @@ public class GameManager : MonoBehaviour
         coinPanels.Add(newCoinPanel);
 
         coinSpace.sizeDelta = new Vector3(coinSpace.sizeDelta.x, -(coinPanels.Count-1) * offset - bottomOffset - topOffset);
+
+        readyCoins.Remove(coin);
     }
 
     void GenerateNotification(Notification notifs)
@@ -155,5 +162,7 @@ public class GameManager : MonoBehaviour
                 coinPanels[i].GetComponent<RectTransform>().DOLocalMoveY(topOffset + i * offset, 0.3f).SetEase(Ease.InOutQuad);
             }
         }
+
+        readyCoins.Add(coinPanel.coin);
     }
 }

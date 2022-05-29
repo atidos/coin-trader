@@ -23,6 +23,8 @@ public class CoinPanel : MonoBehaviour
     public AudioClip[] sellSounds;
     public AudioClip[] notSounds;
 
+    public Coin coin;
+
     float previous = 0; //price in previous frame
     float current = 0; //price in current frame
     float price = 0; //price after calculating with priceConstant
@@ -45,6 +47,7 @@ public class CoinPanel : MonoBehaviour
         coinIcon.sprite = coin.icon;
         priceConstant = pCons;
         timeConstant = tCons;
+        this.coin = coin;
     }
 
     void Update()
