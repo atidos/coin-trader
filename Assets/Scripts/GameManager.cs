@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 
@@ -13,6 +14,7 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
+    public int maxLevel = 5; 
     public Level level;
 
     float timeToNextCoin;
@@ -26,6 +28,9 @@ public class GameManager : MonoBehaviour
     public float offset = -195;
     public float bottomOffset = -275;
 
+    public Text startPanelText;
+    public GameObject winPanel;
+    public Image objectiveImage;
 
     public List<CoinPanel> coinPanels = new List<CoinPanel>();
 
@@ -36,6 +41,8 @@ public class GameManager : MonoBehaviour
     private int money = 1000;
 
     public AudioSource audioSource;
+
+    IEnumerator coinCoroutine;
 
     public int Money
     {
@@ -48,7 +55,7 @@ public class GameManager : MonoBehaviour
             money = value;
             if (money >= level.targetBalance)
             {
-                //wingame
+                EndLevel();
             }
         }
     }
@@ -75,7 +82,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        LoadLevel(1);
+        audioSource = GetComponent<AudioSource>();
+
+        if (!PlayerPrefs.HasKey("level")) PlayerPrefs.SetInt("level", 1);
+        startPanelText.text = PlayerPrefs.GetInt("level").ToString();
+        LoadLevel(PlayerPrefs.GetInt("level"));
     }
 
     private void Update()
@@ -98,7 +109,9 @@ public class GameManager : MonoBehaviour
         }
         CreateCoinPanel(readyCoins[Random.Range(0, readyCoins.Count)], peakPrice, peakTime);
 
-        StartCoroutine(CoinLoop(nextTime));
+
+        coinCoroutine = CoinLoop(nextTime);
+        StartCoroutine(coinCoroutine);
     }
 
     IEnumerator NotificationLoop(float delayTime)
@@ -113,17 +126,32 @@ public class GameManager : MonoBehaviour
         level = Resources.Load<Level>("Levels/" + lvindex);
 
         readyCoins = new List<Coin>(level.coins);
-        audioSource = GetComponent<AudioSource>();
+        priceRange = new Vector2Int(level.startingBalance, level.targetBalance / 5);
+        Money = level.startingBalance;
 
-        StartCoroutine(CoinLoop(0));
+        objectiveImage.sprite = level.targetImage;
 
         Debug.Log("Level " + lvindex + " loaded.");
     }
 
-    bool ChangeBalance(float amount)
+    public void StartLevel()
     {
-        level.targetBalance += amount;
-        return true;
+        coinCoroutine = CoinLoop(0);
+        StartCoroutine(coinCoroutine);
+    }
+
+    public void EndLevel()
+    {
+        winPanel.SetActive(true);
+        coinSpace.DOMoveX(-1500, 0.5f).SetEase(Ease.InQuad);
+        int levelIndex = PlayerPrefs.GetInt("level");
+        
+        if(levelIndex < maxLevel) PlayerPrefs.SetInt("level", levelIndex + 1);
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void CreateCoinPanel(Coin coin, int peakPrice, float curveTime)

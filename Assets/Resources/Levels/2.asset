@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef2fccc6ff9999a4aab19c49563912ee, type: 3}
-  m_Name: 1
+  m_Name: 2
   m_EditorClassIdentifier: 
   coins:
   - {fileID: 11400000, guid: dc3ae7fc27523094f9590eb7ab6af459, type: 2}
@@ -38,6 +38,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9eeb6158726f5da4eab77640d54bd33a, type: 2}
   notifs:
   - {fileID: 11400000, guid: 95f2be90ea07c3a4e8e262ac84f74160, type: 2}
-  startingBalance: 4
-  targetBalance: 10
-  targetImage: {fileID: 21300000, guid: e4c9fb77b011b024a867e9f7fef610d4, type: 3}
+  startingBalance: 10
+  targetBalance: 100
+  targetImage: {fileID: 21300000, guid: 807019d41f72c00489a5bc9fad8a23c4, type: 3}

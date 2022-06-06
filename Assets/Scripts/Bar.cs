@@ -22,7 +22,7 @@ public class Bar : MonoBehaviour
 
     void Update()
     {
-        float ratio = GameManager.Instance.Money / GameManager.Instance.level.targetBalance;
+        float ratio = (float)GameManager.Instance.Money / GameManager.Instance.level.targetBalance;
 
         targetValue = -Mathf.Lerp(rtBar.rect.width, 0, ratio);
         currentValue = Mathf.SmoothDamp(rtFill.offsetMax.x, targetValue, ref vel, smoothTime);

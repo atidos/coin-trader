@@ -7,6 +7,7 @@ public class Level : ScriptableObject
 {
     public List<Coin> coins;
     public List<Notification> notifs;
-    public float targetBalance = 0f;
-    Sprite targetImage;
+    public int startingBalance = 0;
+    public int targetBalance = 0;
+    public Sprite targetImage;
 }
