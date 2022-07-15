@@ -196,6 +196,6 @@ public class GameManager : MonoBehaviour
 
     int CalculateCoinPrice()
     {
-
+        return 5;
     }
 }
