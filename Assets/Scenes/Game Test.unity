@@ -746,7 +746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 276}
+  m_AnchoredPosition: {x: 0, y: 122}
   m_SizeDelta: {x: 589.3876, y: 104.0947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &454905447
@@ -825,7 +825,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -20.95639}
+  m_AnchoredPosition: {x: 0, y: 259}
   m_SizeDelta: {x: 589.3876, y: 104.0947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &462390536
@@ -1234,13 +1234,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa0c04901e4ae14f98a28a581f44467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLevel: 30
   level: {fileID: 0}
   coinPanelPrefab: {fileID: 7660898967129210777, guid: 2c1e8742b5c75de418ef0e49207b19d6, type: 3}
   coinSpace: {fileID: 2024144251}
   topOffset: -280
   offset: -215
   bottomOffset: -275
+  startPanelText: {fileID: 2094462893}
   winPanel: {fileID: 1421554880}
+  objectiveImage: {fileID: 689231954}
   coinPanels: []
   timeRange: {x: 2, y: 3}
   priceRange: {x: 300, y: 3000}
@@ -1841,7 +1844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1035154306
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2142,7 +2145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1364478156
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2242,7 +2245,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000015259, y: -33}
-  m_SizeDelta: {x: 811.22, y: 852.0951}
+  m_SizeDelta: {x: 811.22, y: 569.3024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1421554882
 CanvasGroup:
@@ -2409,7 +2412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -252.05103}
+  m_AnchoredPosition: {x: 0, y: -113}
   m_SizeDelta: {x: 629.3619, y: 158.8487}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1612095712
@@ -2455,7 +2458,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1612095713}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 643976824}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: NextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1612095713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2823,7 +2838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1949662274
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3026,8 +3041,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 141.07434}
-  m_SizeDelta: {x: 589.3876, y: 221.7685}
+  m_AnchoredPosition: {x: 0, y: 22.1628}
+  m_SizeDelta: {x: 589.3876, y: 293.4428}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2094462893
 MonoBehaviour:
@@ -3051,7 +3066,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 85c360c1343a08c48a8148700a6609f7, type: 3}
-    m_FontSize: 219
+    m_FontSize: 250
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0

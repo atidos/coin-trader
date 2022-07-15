@@ -14,7 +14,7 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    public int maxLevel = 5; 
+    public int maxLevel = 30; 
     public Level level;
 
     float timeToNextCoin;
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         level = Resources.Load<Level>("Levels/" + lvindex);
 
         readyCoins = new List<Coin>(level.coins);
-        priceRange = new Vector2Int(level.startingBalance, level.targetBalance / 5);
+        priceRange = new Vector2Int(level.startingBalance, level.targetBalance/5);
         Money = level.startingBalance;
 
         objectiveImage.sprite = level.targetImage;
@@ -192,5 +192,10 @@ public class GameManager : MonoBehaviour
         }
 
         readyCoins.Add(coinPanel.coin);
+    }
+
+    int CalculateCoinPrice()
+    {
+
     }
 }
