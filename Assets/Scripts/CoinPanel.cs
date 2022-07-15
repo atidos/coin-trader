@@ -9,6 +9,7 @@ public class CoinPanel : MonoBehaviour
     public Text priceText;
     public Text coinText;
     public Image coinIcon;
+    public Image frameImage;
     public AnimationCurve curve;
 
     public Sprite indicatorUp;
@@ -16,6 +17,8 @@ public class CoinPanel : MonoBehaviour
     public Sprite buyButtonImage;
     public Sprite buyButtonDisabledImage;
     public Sprite sellButtonImage;
+    public Sprite goldFrame;
+    public Sprite diamondFrame;
     public Color upColor;
     public Color downColor;
 
@@ -28,7 +31,7 @@ public class CoinPanel : MonoBehaviour
     float previous = 0; //price in previous frame
     float current = 0; //price in current frame
     float price = 0; //price after calculating with priceConstant
-    int priceConstant = 1000; // value to multiply with current price
+    float priceConstant = 1000; // value to multiply with current price
     float timeConstant = 50; // value to divide current position on curve, helps determining the lifetime of the coin/curve
 
     float initTime;
@@ -41,13 +44,26 @@ public class CoinPanel : MonoBehaviour
         initTime = Time.time;
     }
     
-    public void Init(Coin coin, int pCons, float tCons)
+    public void Init(Coin coin, float pCons, float tCons, int tier)
     {
         coinText.text = coin.coinName;
         coinIcon.sprite = coin.icon;
         priceConstant = pCons;
         timeConstant = tCons;
         this.coin = coin;
+
+        if (tier == 0)
+        {
+            frameImage.enabled = false;
+        }
+        else if (tier == 1)
+        {
+            frameImage.sprite = goldFrame;
+        }
+        else if(tier == 2)
+        {
+            frameImage.sprite = diamondFrame;
+        }
     }
 
     void Update()
@@ -60,7 +76,7 @@ public class CoinPanel : MonoBehaviour
         }
 
         price = current * priceConstant; 
-        priceText.text = Mathf.Floor(price).ToString() + "$"; //this and the above line shape the price tag
+        priceText.text = Utils.AbbrevationUtility.AbbreviateNumber(price) + "$"; //this and the above line shape the price tag
 
         if (current < previous && indicatorImage.sprite != indicatorDown) //checks if the price started dropping or not
         {
@@ -96,7 +112,7 @@ public class CoinPanel : MonoBehaviour
         {
             if(GameManager.Instance.Money >= price)
             {
-                GameManager.Instance.Money -= (int)price;
+                GameManager.Instance.Money -= price;
                 purchased = true;
                 button.image.sprite = sellButtonImage;
 
@@ -113,7 +129,7 @@ public class CoinPanel : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.Money += (int)price;
+            GameManager.Instance.Money += price;
             GameManager.Instance.RemoveCoinPanel(this);
 
             if (sellSounds.Length > 0)

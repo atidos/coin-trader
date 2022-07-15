@@ -30,6 +30,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8cfe7fab14fd026449ad3e11c43ee972, type: 2}
   notifs:
   - {fileID: 11400000, guid: 95f2be90ea07c3a4e8e262ac84f74160, type: 2}
-  startFraction: 0.14
+  startFraction: 0.02
   targetBalance: 20000
   targetImage: {fileID: 21300000, guid: cbee09311021f1e44ba31ec627e1ebb2, type: 3}

@@ -1249,6 +1249,30 @@ MonoBehaviour:
   priceRange: {x: 300, y: 3000}
   curveTimeLenght: {x: 5, y: 60}
   audioSource: {fileID: 0}
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.09754816
+      outSlope: 0.09754816
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33125
+    - serializedVersion: 3
+      time: 1
+      value: 1.0047188
+      inSlope: 3.1922414
+      outSlope: 3.1922414
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.072404325
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &643976825
 Transform:
   m_ObjectHideFlags: 0
@@ -2746,6 +2770,30 @@ MonoBehaviour:
   rtFill: {fileID: 743299385}
   objectiveText: {fileID: 1721546135}
   smoothTime: 0.2
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.7768441
+      outSlope: 1.7768441
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.08092485
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.14434709
+      outSlope: 0.14434709
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2716763
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1876015845
 GameObject:
   m_ObjectHideFlags: 0

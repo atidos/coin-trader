@@ -38,13 +38,15 @@ public class GameManager : MonoBehaviour
     public Vector2Int priceRange;
     public Vector2 curveTimeLenght;
 
-    private int money = 1000;
+    private float money = 1000;
 
     public AudioSource audioSource;
 
     IEnumerator coinCoroutine;
 
-    public int Money
+    public AnimationCurve curve;
+
+    public float Money
     {
         get 
         {
@@ -100,14 +102,22 @@ public class GameManager : MonoBehaviour
         //create coinpanel
 
         float nextTime = Random.Range(timeRange.x, (float)timeRange.y);
-        int peakPrice = Random.Range(priceRange.x, priceRange.y);
+
+        int[] dice = { 0, 1, 2 };
+        int tier = dice[Random.Range(0, 3)];
+        float peakPrice = CalculateCoinPrice(tier);
+
         float peakTime = Random.Range(curveTimeLenght.x, (float)curveTimeLenght.y);
 
         while(readyCoins.Count == 0)
         {
             yield return null;
         }
-        CreateCoinPanel(readyCoins[Random.Range(0, readyCoins.Count)], peakPrice, peakTime);
+
+
+       
+
+        CreateCoinPanel(readyCoins[Random.Range(0, readyCoins.Count)], peakPrice, peakTime, tier);
 
 
         coinCoroutine = CoinLoop(nextTime);
@@ -154,7 +164,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    void CreateCoinPanel(Coin coin, int peakPrice, float curveTime)
+    void CreateCoinPanel(Coin coin, float peakPrice, float curveTime, int tier)
     {
         GameObject newCoinPanelObj = Instantiate(coinPanelPrefab, coinSpace.transform);
 
@@ -164,7 +174,8 @@ public class GameManager : MonoBehaviour
         newCoinPanelObj.transform.DOScale(Vector3.one, 0.8f).SetEase(Ease.OutElastic, 0.1f, 0.5f);
 
         CoinPanel newCoinPanel = newCoinPanelObj.GetComponent<CoinPanel>();
-        newCoinPanel.Init(coin, peakPrice, curveTime);
+
+        newCoinPanel.Init(coin, peakPrice, curveTime, tier);
         coinPanels.Add(newCoinPanel);
 
         coinSpace.sizeDelta = new Vector3(coinSpace.sizeDelta.x, -(coinPanels.Count-1) * offset - bottomOffset - topOffset);
@@ -194,8 +205,28 @@ public class GameManager : MonoBehaviour
         readyCoins.Add(coinPanel.coin);
     }
 
-    int CalculateCoinPrice()
+    float CalculateCoinPrice(int tier)
     {
-        return 5;
+        float min = level.startingBalance;
+        float max = level.targetBalance * 0.2f;
+
+        if (tier == 0)
+        {
+            return Random.Range(min, LerpExp(min, max, 0.15f));
+        }
+        else if (tier == 1)
+        {
+            return Random.Range(LerpExp(min, max, 0.3f), LerpExp(min, max, 0.6f));
+        }
+        else if (tier == 2)
+        {
+            return Random.Range(LerpExp(min, max, 0.7f), max);
+        }
+        return min;
+    }
+
+    float LerpExp(float a, float b, float t)
+    {
+        return a + curve.Evaluate(t) * (b - a);
     }
 }

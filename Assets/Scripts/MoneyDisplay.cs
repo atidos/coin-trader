@@ -14,7 +14,7 @@ public class MoneyDisplay : MonoBehaviour
 
     void Update()
     {
-        int money = GameManager.Instance.Money;
-        moneyText.text = money.ToString() + "$";
+        float money = GameManager.Instance.Money;
+        moneyText.text = Utils.AbbrevationUtility.AbbreviateNumber(money) + "$";
     }
 }

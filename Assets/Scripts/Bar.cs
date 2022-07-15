@@ -14,6 +14,8 @@ public class Bar : MonoBehaviour
     float vel;
     public float smoothTime = 0.2f;
 
+    public AnimationCurve curve;
+
     private void Start()
     {
         rtBar = GetComponent<RectTransform>();
@@ -24,9 +26,14 @@ public class Bar : MonoBehaviour
     {
         float ratio = (float)GameManager.Instance.Money / GameManager.Instance.level.targetBalance;
 
-        targetValue = -Mathf.Lerp(rtBar.rect.width, 0, ratio);
+        targetValue = -LerpExp(rtBar.rect.width, 0, ratio);
         currentValue = Mathf.SmoothDamp(rtFill.offsetMax.x, targetValue, ref vel, smoothTime);
 
         rtFill.offsetMax = new Vector2(currentValue, rtFill.offsetMax.y);
+    }
+
+    float LerpExp(float a, float b, float t)
+    {
+        return a + curve.Evaluate(t) * (b - a);
     }
 }
