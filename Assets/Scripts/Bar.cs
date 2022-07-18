@@ -19,7 +19,7 @@ public class Bar : MonoBehaviour
     private void Start()
     {
         rtBar = GetComponent<RectTransform>();
-        objectiveText.text = GameManager.Instance.level.targetBalance.ToString() + "$";
+        objectiveText.text = Utils.AbbrevationUtility.AbbreviateNumber(GameManager.Instance.level.targetBalance) + "$";
     }
 
     void Update()

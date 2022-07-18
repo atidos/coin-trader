@@ -34,5 +34,5 @@ MonoBehaviour:
   notifs:
   - {fileID: 11400000, guid: 95f2be90ea07c3a4e8e262ac84f74160, type: 2}
   startFraction: 0.002
-  targetBalance: 2000000000
+  targetBalance: 2.1474836e+9
   targetImage: {fileID: 21300000, guid: 603de89d965e88a4ba9a80a3cac89ef5, type: 3}

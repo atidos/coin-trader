@@ -23,7 +23,9 @@ public class CoinPanel : MonoBehaviour
     public Color downColor;
 
     public AudioClip[] buySounds;
-    public AudioClip[] sellSounds;
+    public AudioClip[] normalSellSounds;
+    public AudioClip[] goldSellSounds;
+    public AudioClip[] diaSellSounds;
     public AudioClip[] notSounds;
 
     public Coin coin;
@@ -33,24 +35,38 @@ public class CoinPanel : MonoBehaviour
     float price = 0; //price after calculating with priceConstant
     float priceConstant = 1000; // value to multiply with current price
     float timeConstant = 50; // value to divide current position on curve, helps determining the lifetime of the coin/curve
-
+    int tier = 0;
     float initTime;
 
     bool purchased = false;
 
+    public bool tutorial = false;
+    public GameObject hintPanel1;
+    public GameObject hintPanel2;
+    public GameObject hintPanel3;
+
+    bool paused = false;
 
     void Start()
     {
         initTime = Time.time;
     }
     
-    public void Init(Coin coin, float pCons, float tCons, int tier)
+    public void Init(Coin coin, float pCons, float tCons, int coinTier)
     {
         coinText.text = coin.coinName;
         coinIcon.sprite = coin.icon;
         priceConstant = pCons;
         timeConstant = tCons;
         this.coin = coin;
+        tier = coinTier;
+
+        if (tutorial)
+        {
+            priceConstant = 2;
+            timeConstant = 8;
+            tier = 0;
+        }
 
         if (tier == 0)
         {
@@ -64,24 +80,43 @@ public class CoinPanel : MonoBehaviour
         {
             frameImage.sprite = diamondFrame;
         }
+
+        if(tutorial) // in tutorial freeze time and show hint
+        {
+            paused = true;
+            hintPanel1.SetActive(true);
+        }
     }
 
     void Update()
     {
         current = curve.Evaluate((Time.time-initTime)/timeConstant); //calculates the current price using the curve and timeConstant
+        price = current * priceConstant;
+        priceText.text = Utils.AbbrevationUtility.AbbreviateNumber(price) + "$"; //this and the above line shape the price tag
+
+        if (paused)
+        {
+            initTime += Time.deltaTime; // stop time by incrementing init time
+            return;
+        }
 
         if((Time.time - initTime) / timeConstant > 1)
         {
             GameManager.Instance.RemoveCoinPanel(this);
         }
 
-        price = current * priceConstant; 
-        priceText.text = Utils.AbbrevationUtility.AbbreviateNumber(price) + "$"; //this and the above line shape the price tag
 
         if (current < previous && indicatorImage.sprite != indicatorDown) //checks if the price started dropping or not
         {
             indicatorImage.sprite = indicatorDown; //if price is dropping change the color to red
             priceText.color = downColor;
+
+            if (tutorial) // in tutorial freeze time and show hint
+            {
+                paused = true;
+                hintPanel2.SetActive(false);
+                hintPanel3.SetActive(true);
+            }
         }
         else if(current > previous && indicatorImage.sprite != indicatorUp) //checks if the price started dropping or not
         {
@@ -108,7 +143,7 @@ public class CoinPanel : MonoBehaviour
 
     public void BuySell()
     {
-        if(!purchased) //not purchased yet
+        if(!purchased) //buying
         {
             if(GameManager.Instance.Money >= price)
             {
@@ -118,6 +153,13 @@ public class CoinPanel : MonoBehaviour
 
                 if(buySounds.Length > 0)
                     GameManager.Instance.audioSource.PlayOneShot(buySounds[Random.Range(0, buySounds.Length - 1)], 0.2f);
+
+                if (tutorial) // in tutorial freeze time and show hint
+                {
+                    paused = false;
+                    hintPanel1.SetActive(false);
+                    hintPanel2.SetActive(true);
+                }
             }
             else
             {
@@ -127,13 +169,26 @@ public class CoinPanel : MonoBehaviour
                     GameManager.Instance.audioSource.PlayOneShot(notSounds[Random.Range(0, notSounds.Length - 1)], 0.2f);
             }
         }
-        else
+        else //selling
         {
-            GameManager.Instance.Money += price;
+            if (tutorial && Time.time - initTime < timeConstant/2)
+            {
+                GameManager.Instance.Money = 1;
+            }
+            else
+            {
+                GameManager.Instance.Money += price;
+            }
+
             GameManager.Instance.RemoveCoinPanel(this);
 
-            if (sellSounds.Length > 0)
-                GameManager.Instance.audioSource.PlayOneShot(sellSounds[Random.Range(0, sellSounds.Length - 1)], 0.2f);
+            if (normalSellSounds.Length > 0)
+                GameManager.Instance.audioSource.PlayOneShot(normalSellSounds[Random.Range(0, normalSellSounds.Length - 1)], 0.2f);
+            if (tier == 1 && goldSellSounds.Length > 0)
+                GameManager.Instance.audioSource.PlayOneShot(goldSellSounds[Random.Range(0, goldSellSounds.Length - 1)], 0.2f);
+            if (tier == 2 && diaSellSounds.Length > 0)
+                GameManager.Instance.audioSource.PlayOneShot(diaSellSounds[Random.Range(0, diaSellSounds.Length - 1)], 0.2f);
+
         }
     }
 }

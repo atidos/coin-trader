@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     float timeToNextCoin;
 
     public GameObject coinPanelPrefab;
+    public GameObject tutorialCoinPanelPrefab;
 
     List<Coin> readyCoins;
     public RectTransform coinSpace;
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
     public List<CoinPanel> coinPanels = new List<CoinPanel>();
 
     public Vector2 timeRange;
-    public Vector2Int priceRange;
+    public Vector2 priceRange;
     public Vector2 curveTimeLenght;
 
     private float money = 1000;
@@ -86,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        if (!PlayerPrefs.HasKey("level")) PlayerPrefs.SetInt("level", 1);
+        if (!PlayerPrefs.HasKey("level")) PlayerPrefs.SetInt("level", 0);
         startPanelText.text = PlayerPrefs.GetInt("level").ToString();
         LoadLevel(PlayerPrefs.GetInt("level"));
     }
@@ -103,8 +104,8 @@ public class GameManager : MonoBehaviour
 
         float nextTime = Random.Range(timeRange.x, (float)timeRange.y);
 
-        int[] dice = { 0, 1, 2 };
-        int tier = dice[Random.Range(0, 3)];
+        int[] dice = { 0,0,0,0,0,1,1,1,1,2,2,2 };
+        int tier = dice[Random.Range(0, dice.Length)];
         float peakPrice = CalculateCoinPrice(tier);
 
         float peakTime = Random.Range(curveTimeLenght.x, (float)curveTimeLenght.y);
@@ -136,7 +137,7 @@ public class GameManager : MonoBehaviour
         level = Resources.Load<Level>("Levels/" + lvindex);
 
         readyCoins = new List<Coin>(level.coins);
-        priceRange = new Vector2Int(level.startingBalance, level.targetBalance/5);
+        priceRange = new Vector2(level.startingBalance, level.targetBalance/5);
         Money = level.startingBalance;
 
         objectiveImage.sprite = level.targetImage;
@@ -166,7 +167,9 @@ public class GameManager : MonoBehaviour
 
     void CreateCoinPanel(Coin coin, float peakPrice, float curveTime, int tier)
     {
-        GameObject newCoinPanelObj = Instantiate(coinPanelPrefab, coinSpace.transform);
+        GameObject newCoinPanelObj = (PlayerPrefs.GetInt("level") != 0) ?  
+            Instantiate(coinPanelPrefab, coinSpace.transform):
+            Instantiate(tutorialCoinPanelPrefab, coinSpace.transform);
 
         newCoinPanelObj.GetComponent<RectTransform>().localPosition += new Vector3(0, topOffset + coinPanels.Count * offset); //localposition is the position relative to parent
 
@@ -212,15 +215,15 @@ public class GameManager : MonoBehaviour
 
         if (tier == 0)
         {
-            return Random.Range(min, LerpExp(min, max, 0.15f));
+            return Random.Range(min, LerpExp(min, max, 0.2f));
         }
         else if (tier == 1)
         {
-            return Random.Range(LerpExp(min, max, 0.3f), LerpExp(min, max, 0.6f));
+            return Random.Range(LerpExp(min, max, 0.5f), LerpExp(min, max, 0.7f)) / 0.34f;
         }
         else if (tier == 2)
         {
-            return Random.Range(LerpExp(min, max, 0.7f), max);
+            return Random.Range(LerpExp(min, max, 0.8f), max) / 0.34f;
         }
         return min;
     }

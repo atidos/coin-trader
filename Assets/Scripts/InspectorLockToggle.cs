@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System;
 using System.Linq;
 using System.Reflection;
@@ -54,3 +55,4 @@ public class InspectorLockToggle
         type.GetMethod("Clear").Invoke(null, null);
     }
 }
+#endif
